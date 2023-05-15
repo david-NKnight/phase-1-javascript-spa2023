@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Fox SPA</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+		.container {
+			width: 500px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.btn {
+			margin-top: 20px;
+			padding: 10px 20px;
+			background-color: #3498db;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+    <h1>Welcome to Random Fox!</h1>
+    <p>Click the button below to see a random fox image:</p>
+    <button id="new-image-btn">New Image</button>
+    <button id="send-image-btn" class="btn">Send Image</button>
+	<div class="container">
+		<img id="fox-image" src="" alt="Random Fox Image">
+		
+	</div>
+
+	<script>
+		const apiUrl = 'https://randomfox.ca/floof/';
+
+		const foxImageEl = document.getElementById('fox-image');
+		const newImageBtn = document.getElementById('new-image-btn');
+        const sendImageBtn = document.getElementById('send-image-btn');
+
+		newImageBtn.addEventListener('click', () => {
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					foxImageEl.src = data.image;
+				})
+				.catch(error => console.error(error));
+		});
+	</script>
+</body>
+</html>
